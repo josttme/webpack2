@@ -1,3 +1,31 @@
+Skip to content
+Search or jump to…
+Pull requests
+Issues
+Marketplace
+Explore
+ 
+@josttme 
+andreimyvc
+/
+js-portfolio
+Public
+Code
+Issues
+Pull requests
+Actions
+Projects
+Wiki
+Security
+Insights
+js-portfolio/.gitignore
+
+carlosvilorio first commit
+Latest commit f2582f8 on 25 Jun 2021
+ History
+ 0 contributors
+104 lines (76 sloc)  1.57 KB
+  
 # Logs
 logs
 *.log
@@ -102,3 +130,16 @@ dist
 
 # TernJS port file
 .tern-port
+© 2022 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Docs
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
+Loading complete
