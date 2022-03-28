@@ -4,39 +4,43 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
-const Dotenv = require('dotenv-webpack');
+const Dontenv = require('dotenv-webpack');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
+	// Entry nos permite decir el punto de entrada de nuestra aplicación
 	entry: './src/index.js',
+	// Output nos permite decir hacia dónde va enviar lo que va a preparar webpacks
 	output: {
+		// path es donde estará la carpeta donde se guardará los archivos
+		// Con path.resolve podemos decir dónde va estar la carpeta y la ubicación del mismo
 		path: path.resolve(__dirname, 'dist'),
+		// filename le pone el nombre al archivo final
 		filename: '[name].[contenthash].js',
-		assetModuleFilename: 'assets/images/[hash][ext][query]',
+
+		assetModuleFilename: 'assets/images/[hash][ext]',
 	},
 	resolve: {
+		// Aqui ponemos las extensiones que tendremos en nuestro proyecto para webpack los lea
 		extensions: ['.js'],
 		alias: {
-			'@utils': path.resolve(__dirname, 'src/utils'),
-			'@templates': path.resolve(__dirname, 'src/templates'),
-			'@styles': path.resolve(__dirname, 'src/styles'),
-			'@images': path.resolve(__dirname, 'src/assets/images'),
+			'@utils': path.resolve(__dirname, 'src/utils/'),
+			'@templates': path.resolve(__dirname, 'src/templates/'),
+			'@styles': path.resolve(__dirname, 'src/styles/'),
+			'@images': path.resolve(__dirname, 'src/assets/images/'),
 		},
 	},
 	module: {
 		rules: [
 			{
-				// Test declara que extensión de archivos aplicara el loader
 				test: /\.m?js$/,
-				// Use es un arreglo u objeto donde dices que loader aplicaras
+				exclude: /node_modules/,
 				use: {
 					loader: 'babel-loader',
 				},
-				exclude: /node_modules/,
-				// Exclude permite omitir archivos o carpetas especificas
 			},
 			{
-				test: /\.s?css$/i,
+				test: /\.s?css$/,
 				use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
 			},
 			{
@@ -44,10 +48,10 @@ module.exports = {
 				type: 'asset/resource',
 			},
 			{
-				test: /\.(woff|woff2)$/i, // Tipos de fuentes a incluir
-				type: 'asset/resource', // Tipo de módulo a usar (este mismo puede ser usado para archivos de imágenes)
+				test: /\.(woff|woff2)$/i,
+				type: 'asset/resource',
 				generator: {
-					filename: 'assets/fonts/[hash][ext][query]', // Directorio de salida
+					filename: 'assets/fonts/[hash][ext]',
 				},
 			},
 		],
@@ -61,7 +65,6 @@ module.exports = {
 		new MiniCssExtractPlugin({
 			filename: 'assets/[name].[contenthash].css',
 		}),
-
 		new CopyPlugin({
 			patterns: [
 				{
@@ -70,7 +73,7 @@ module.exports = {
 				},
 			],
 		}),
-		new Dotenv(),
+		new Dontenv(),
 		new CleanWebpackPlugin(),
 	],
 	optimization: {
